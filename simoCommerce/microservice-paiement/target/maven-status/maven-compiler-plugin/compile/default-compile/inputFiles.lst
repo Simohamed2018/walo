@@ -1,0 +1,8 @@
+C:\mcommerce\microservice-paiement\src\main\java\com\mpaiement\dao\PaiementDao.java
+C:\mcommerce\microservice-paiement\src\main\java\com\mpaiement\MpaiementApplication.java
+C:\mcommerce\microservice-paiement\src\main\java\com\mpaiement\beans\CommandeBean.java
+C:\mcommerce\microservice-paiement\src\main\java\com\mpaiement\web\exceptions\PaiementImpossibleException.java
+C:\mcommerce\microservice-paiement\src\main\java\com\mpaiement\web\controller\PaiementController.java
+C:\mcommerce\microservice-paiement\src\main\java\com\mpaiement\web\exceptions\PaiementExistantException.java
+C:\mcommerce\microservice-paiement\src\main\java\com\mpaiement\model\Paiement.java
+C:\mcommerce\microservice-paiement\src\main\java\com\mpaiement\proxies\MicroserviceCommandeProxy.java

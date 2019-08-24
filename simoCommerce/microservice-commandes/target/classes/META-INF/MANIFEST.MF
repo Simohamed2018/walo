@@ -1,0 +1,10 @@
+Manifest-Version: 1.0
+Implementation-Title: mcommandes
+Implementation-Version: 0.0.1-SNAPSHOT
+Built-By: anas
+Implementation-Vendor-Id: com.mcommandes
+Build-Jdk: 1.8.0_111
+Implementation-URL: https://projects.spring.io/spring-boot/#/spring-bo
+ ot-starter-parent/mcommandes
+Created-By: Maven Integration for Eclipse
+

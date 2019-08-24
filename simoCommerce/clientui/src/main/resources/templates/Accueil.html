@@ -1,0 +1,33 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Mcommerce</title>
+
+    <link rel="stylesheet" type="text/css"
+	          th:href="@{/webjars/bootstrap/3.4.0/css/bootstrap.min.css}" />
+</head>
+<body>
+<div th:replace="fragments/header.html :: navbar"></div>
+
+<div class="container">
+
+    <h1 class="text-center" >Catalogue des produits </h1>
+
+    <div class="row">
+
+        <!--
+        Boucle sur tous les objets de type "produit" de la liste et affichage des informations produit.
+        -->
+        <div th:each="produit : ${produits}" class="col-md-4 my-1">
+            <a th:href="@{'/details-produit/'+${produit.id}}" >
+                <img th:src="${produit.image}+${produit.id}"  class="card-img-top" />
+                <p th:text= "${produit.titre}"></p>
+            </a>
+        </div>
+    </div>
+
+</div>
+
+<div th:replace="fragments/footer.html :: footer"></div>
+
+

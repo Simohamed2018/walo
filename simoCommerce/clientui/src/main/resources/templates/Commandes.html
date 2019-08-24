@@ -1,0 +1,59 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Mcommerce</title>
+
+    <link rel="stylesheet" type="text/css"
+	          th:href="@{/webjars/bootstrap/3.4.0/css/bootstrap.min.css}" />
+</head>
+<body>
+<div th:replace="fragments/header.html :: navbar"></div>
+
+<div class="container">
+
+    <h1 class="text-center" >Listes des commandes  </h1>
+    
+    
+    <table class="table table-striped">
+    <thead>
+      <tr class="success">
+        <th>id</th>
+        <th>date commande</th>
+        <th>Produit</th>
+        <th>Quantite</th>
+        <th>Payé</th>
+      </tr>
+    </thead>
+    <tbody>
+      
+       <tr th:each="commande : ${commandes}" >
+           <td> <a th:href="@{'/commandes/'+${commande.id}+'/details-produit/'+${commande.productId}}" ><p th:text= "${commande.id}"></p> </a></td>
+           <td> <p th:text= "${commande.dateCommande}"></p></td>
+            <td> <p th:text= "${commande.productId}"></p>  </td>              
+             <td>   <p th:text= "${commande.quantite}"></p>   </td>             
+              <td>  <p  th:text= "${commande.commandePayee}" ></p></td>
+            
+        </tr>
+    
+    </tbody>
+  </table>
+
+    <!-- <div class="row">
+
+        
+        Boucle sur tous les objets de type "produit" de la liste et affichage des informations produit.
+       
+        <div th:each="commande : ${commandes}" class="col-md-4 my-1">
+            <a th:href="@{'/details-commande/'+${commande.id}}" >
+            <p th:text= "${commande.dateCommande}"></p>
+             <p th:text= "${commande.productId}"></p>                
+                <p th:text= "${commande.quantite}"></p>                
+                <p  th:text= "${commande.commandePayee}" ></p>
+            </a>
+        </div>
+    </div> -->
+
+</div>
+
+
+<div th:replace="fragments/footer.html :: footer"></div>

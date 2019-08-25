@@ -1,0 +1,45 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Mcommerce</title>
+
+    <link rel="stylesheet" type="text/css"
+          th:href="@{/webjars/bootstrap/3.4.0/css/bootstrap.min.css}"/>
+</head>
+<body>
+<div th:replace="fragments/header.html :: navbar"></div>
+
+<div class="container">
+
+    <h1 class="text-center">Listes des Paiements </h1>
+
+
+    <table class="table table-striped">
+        <thead>
+        <tr class="success">
+            <th>id</th>
+            <th>date commande</th>
+            <th>Produit</th>
+            <th>Quantite</th>
+            <th>Pay�</th>
+        </tr>
+        </thead>
+        <tbody>
+
+        <tr th:each="paiement : ${paiements}">
+            <td><a th:href="@{'/paiements/'}"><p th:text="${paiement.id}"></p></a></td>
+            <td><p th:text="${paiement.id}"></p></td>
+            <td><p th:text="${paiement.idCommande}"></p></td>
+            <td><p th:text="${paiement.numeroCarte}"></p></td>
+            <td><p th:text="${paiement.montant}"></p></td>
+
+        </tr>
+
+        </tbody>
+    </table>
+
+
+</div>
+
+
+<div th:replace="fragments/footer.html :: footer"></div>

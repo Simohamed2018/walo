@@ -6,11 +6,13 @@ import com.mpaiement.model.Paiement;
 import com.mpaiement.proxies.MicroserviceCommandeProxy;
 import com.mpaiement.web.exceptions.PaiementExistantException;
 import com.mpaiement.web.exceptions.PaiementImpossibleException;
+import com.mpaiement.web.exceptions.PaiementsNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Optional;
 
 @RestController
@@ -54,6 +56,17 @@ public class PaiementController {
         //on renvoi 201 CREATED pour notifier le client au le paiement à été enregistré
         return new ResponseEntity<Paiement>(nouveauPaiement, HttpStatus.CREATED);
 
+    }
+
+    @GetMapping(value = "/paiements")
+    List<Paiement> recupererLesPaiements() throws PaiementsNotFoundException {
+
+
+        List<Paiement> paiements = paiementDao.findAll();
+
+        if(paiements.size()==0) throw new PaiementsNotFoundException("les paiements n'existent pas");
+
+        return paiements;
     }
 
 

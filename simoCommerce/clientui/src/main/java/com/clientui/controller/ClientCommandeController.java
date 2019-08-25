@@ -24,19 +24,19 @@ import java.util.concurrent.ThreadLocalRandom;
 public class ClientCommandeController {
 
     @Autowired
-    private MicroserviceProduitsProxy ProduitsProxy;
+    private MicroserviceProduitsProxy produitsProxy;
 
     @Autowired
-    private MicroserviceCommandeProxy CommandesProxy;
+    private MicroserviceCommandeProxy commandesProxy;
 
     @Autowired
-    private MicroservicePaiementProxy paiementProxy;
+    private MicroservicePaiementProxy paiementsProxy;
 
 
     @RequestMapping(value="/commandes")
     public String afficherCommandes(Model model){
 
-       List<CommandeBean> commandes =  CommandesProxy.recupererLesCommande();
+       List<CommandeBean> commandes =  commandesProxy.recupererLesCommande();
 
        model.addAttribute("commandes", commandes);
 
@@ -54,9 +54,9 @@ public class ClientCommandeController {
     @RequestMapping("/commandes/{idCommande}/details-produit/{id}")
     public String ficheProduit(@PathVariable int idCommande,@PathVariable int id,  Model model){
     	
-    	CommandeBean commande =  CommandesProxy.recupererUneCommande(idCommande);  	
+    	CommandeBean commande =  commandesProxy.recupererUneCommande(idCommande);
 
-        ProductBean produit = ProduitsProxy.recupererUnProduit(id);
+        ProductBean produit = produitsProxy.recupererUnProduit(id);
         model.addAttribute("commande", commande);
 
         model.addAttribute("produit", produit);

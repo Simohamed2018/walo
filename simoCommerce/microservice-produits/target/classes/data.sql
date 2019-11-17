@@ -16,3 +16,6 @@ INSERT INTO PRODUCT (ID , TITRE ,DESCRIPTION ,IMAGE ,PRIX,VENTE ) VALUES (6, 'Ta
 INSERT INTO PRODUCT (ID , TITRE ,DESCRIPTION ,IMAGE ,PRIX,VENTE ) VALUES (7 , 'Vase ayant appartenu a Zeus', 'Risque de choc électrique', 'https://loremflickr.com/320/240?random=', 730.0, 750.0);
 
 INSERT INTO PRODUCT (ID , TITRE ,DESCRIPTION ,IMAGE ,PRIX,VENTE ) VALUES (8 , 'Vase ayant appartenu a Zeus', 'Risque de choc électrique', 'https://loremflickr.com/320/240?random=', 730.0, 800.0);
+INSERT INTO PRODUCT (ID , TITRE ,DESCRIPTION ,IMAGE ,PRIX,VENTE ) VALUES ( 9, 'lapin','lapin','lapin', 730.0, 800.0);
+INSERT INTO PRODUCT (ID , TITRE ,DESCRIPTION ,IMAGE ,PRIX,VENTE ) VALUES ( 10, 'chat', 'chat', 'chat', 730.0, 800.0);
+INSERT INTO PRODUCT (ID , TITRE ,DESCRIPTION ,IMAGE ,PRIX,VENTE ) VALUES ( 11, 'ancien', 'ancien', 'ancien', 730.0, 800.0);

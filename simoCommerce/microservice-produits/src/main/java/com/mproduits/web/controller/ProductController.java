@@ -2,6 +2,8 @@ package com.mproduits.web.controller;
 
 import com.mproduits.dao.ProductDao;
 import com.mproduits.model.Product;
+import com.mproduits.service.ProductService;
+import com.mproduits.service.ProductServiceImp;
 import com.mproduits.web.exceptions.ProductAlreadayExistException;
 import com.mproduits.web.exceptions.ProductNotFoundException;
 
@@ -30,15 +32,13 @@ import javax.validation.Valid;
 public class ProductController {
 
 	@Autowired
-	ProductDao productDao;
-
+	ProductService productService;
 	// Affiche la liste de tous les produits disponibles
 	@ApiOperation(value = "Récupère tous les produit en stock!")
 	@GetMapping(value = "/Produits")
 	public List<Product> listeDesProduits() {
 
-		List<Product> products = productDao.findAll();
-
+		List<Product> products = productService.listeDesProduits();
 		if (products.isEmpty())
 			throw new ProductNotFoundException("Aucun produit n'est disponible à la vente");
 
@@ -51,7 +51,7 @@ public class ProductController {
 	@GetMapping(value = "/Produits/{id}")
 	public Product recupererUnProduit(@PathVariable int id) {
 
-		Product product = productDao.findById(id);
+		Product product = productService.recupererUnProduit(id);
 
 		if (product == null)
 			throw new ProductNotFoundException("Le produit correspondant à l'id " + id + " n'existe pas");
@@ -67,39 +67,39 @@ public class ProductController {
 		if (produit == null || produit.getTitre().isEmpty() || produit.getTitre() == null)
 			throw new ProductAlreadayExistException("Le produit correspondant ne peut etre null ");
 
-		return productDao.save(produit);
+		return productService.ajouterUnProduit(produit);
 	}
 
 	@ApiOperation(value = "Modifier  un produit grâce à son ID à condition que celui-ci soit en stock!")
 	@PutMapping(value = "/Produits")
 	public void updateProduit(@RequestBody Product product) {
 
-		productDao.save(product);
+		productService.ajouterUnProduit(product);
 	}
 
 	@ApiOperation(value = "Supprimer un produit grâce à son ID à condition que celui-ci soit en stock!")
 	@DeleteMapping(value = "/Produits/{id}")
 	public void supprimerProduit(@PathVariable int id) {
 
-		productDao.deleteById(id);
+		productService.supprimerProduit(id);
 	}
 
 	@ApiOperation(value = "Récupère les produit dont le prix est inferieur au prix passé en parametre !")
 	@GetMapping(value = "/Produits/prix/{prixLimit}")
 	public List<Product> testeDeRequetes(@PathVariable double prixLimit) {
 
-		return productDao.findByPrixGreaterThan(prixLimit);
+		return productService.testeDeRequetes(prixLimit);
 	}
 
 	@GetMapping(value = "/Produits/cher/{prixLimit}")
 	public List<Product> produitpasCher(@PathVariable double prixLimit) {
 
-		return productDao.chercherUnProduitCher(prixLimit);
+		return productService.produitpasCher(prixLimit);
 	}
 
 	@GetMapping(value = "/Produits/recherche/{recherche}")
 	public List<Product> testeDeRequetes(@PathVariable String recherche) {
-		return productDao.findByTitreLike("%" + recherche + "%");
+		return productService.testeRecherche("%" + recherche + "%");
 	}
 
 	// ajouter un produit
@@ -107,7 +107,7 @@ public class ProductController {
 	@PostMapping(value = "/Produits")
 	public ResponseEntity<Void> ajouterProduit(@RequestBody Product product) {
 
-		Product productAdded = productDao.save(product);
+		Product productAdded = productService.ajouterProduit(product);
 
 		if (productAdded == null)
 			return ResponseEntity.noContent().build();
@@ -120,17 +120,13 @@ public class ProductController {
 	//afficher la marge du produit
 	@GetMapping(value="/AdminProduits")
 	public List<String> calculerMargeProduit(){
-		List<Product> products = productDao.findAll();
-
+		List<Product> products = productService.calculerMargeProduit();
 		if (products.isEmpty())
 			throw new ProductNotFoundException("Aucun produit n'est disponible à la vente");
-		
 		List<String> maliste= products.stream()
 		.map(p->p + " : "+(p.getVente() - p.getPrix()) )
-		.collect(Collectors.toList()); 
-
+		.collect(Collectors.toList());
 		return maliste;
-		
 		
 	}
 }

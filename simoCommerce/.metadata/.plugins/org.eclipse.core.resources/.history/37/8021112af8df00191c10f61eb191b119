@@ -1,0 +1,39 @@
+package com.simo.controller;
+
+
+import com.simo.model.Compte;
+import com.simo.proxy.MicroserviceProduitsProxy;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+import java.util.List;
+
+
+@RestController
+@RequestMapping("/produits")
+public class ClientController {
+
+    @Autowired
+    private MicroserviceProduitsProxy ProduitsProxy;  
+   
+    @GetMapping()
+    public List<Compte> getAllproduits(){
+
+       List<Compte> produits =  ProduitsProxy.listeDesProduits();
+	return produits;       
+    }   
+   
+    
+    @RequestMapping("/{id}")
+    public Compte ficheProduit(@PathVariable int id){
+
+     Compte produit = ProduitsProxy.recupererUnProduit(id);
+	return produit;
+        
+    }
+
+        
+}

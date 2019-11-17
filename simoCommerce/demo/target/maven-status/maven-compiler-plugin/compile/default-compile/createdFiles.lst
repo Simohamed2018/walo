@@ -1,0 +1,4 @@
+com\simo\proxy\ProxyTodo.class
+com\simo\DemoApplication.class
+com\simo\controller\TodoController.class
+com\simo\model\TodoModel.class

@@ -1,0 +1,18 @@
+package com.simo.model;
+
+public class Product {
+     
+    private int id;
+    
+    private String nomDetenteur;
+    
+    private String banque;      
+   
+    private String typeCompte;    
+   
+    private String descriptionCompte;
+}
+    
+   
+   
+   

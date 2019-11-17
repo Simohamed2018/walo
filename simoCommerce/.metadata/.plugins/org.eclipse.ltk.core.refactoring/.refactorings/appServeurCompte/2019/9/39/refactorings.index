@@ -1,0 +1,16 @@
+1569454147692	Copy compilation unit
+1569457803871	Rename type 'MproduitsApplication'
+1569457807361	Rename type 'MproduitsApplicationTests'
+1569459594859	Rename type 'ServeurProduitsApplication'
+1569459600919	Rename type 'ServeurProduitsApplicationTests'
+1569459661575	Rename type 'ServeurComptesApplication'
+1569459663977	Rename type 'ServeurComptesApplicationTests'
+1569459934033	Copy compilation unit
+1569461409983	Rename type 'ProductDao'
+1569461540266	Rename type 'ProductService'
+1569461561317	Rename type 'ProductServiceImp'
+1569461566501	Rename type 'ProductServiceImpTest'
+1569461603483	Rename type 'ProductController'
+1569461611055	Delete element
+1569461634155	Rename type 'ProductAlreadayExistException'
+1569461654665	Rename type 'ProductNotFoundException'

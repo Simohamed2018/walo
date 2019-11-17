@@ -1,0 +1,100 @@
+package com.simo.model;
+
+public class Compte {
+     
+    private int id;
+    
+    private String nomDetenteur;
+    
+    private String banque;      
+   
+    private String typeCompte;    
+   
+    private String descriptionCompte;
+    private Double solde;
+
+	public Compte() {
+		
+	}
+
+	
+
+	public Compte(int id, String nomDetenteur, String banque, String typeCompte, String descriptionCompte,
+			Double solde) {
+		super();
+		this.id = id;
+		this.nomDetenteur = nomDetenteur;
+		this.banque = banque;
+		this.typeCompte = typeCompte;
+		this.descriptionCompte = descriptionCompte;
+		this.solde = solde;
+	}
+
+
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public String getNomDetenteur() {
+		return nomDetenteur;
+	}
+
+	public void setNomDetenteur(String nomDetenteur) {
+		this.nomDetenteur = nomDetenteur;
+	}
+
+	public String getBanque() {
+		return banque;
+	}
+
+	public void setBanque(String banque) {
+		this.banque = banque;
+	}
+
+	public String getTypeCompte() {
+		return typeCompte;
+	}
+
+	public void setTypeCompte(String typeCompte) {
+		this.typeCompte = typeCompte;
+	}
+
+	public String getDescriptionCompte() {
+		return descriptionCompte;
+	}
+
+	public void setDescriptionCompte(String descriptionCompte) {
+		this.descriptionCompte = descriptionCompte;
+	}
+	
+
+	public Double getSolde() {
+		return solde;
+	}
+
+
+
+	public void setSolde(Double solde) {
+		this.solde = solde;
+	}
+
+
+
+	@Override
+	public String toString() {
+		return "Compte [id=" + id + ", nomDetenteur=" + nomDetenteur + ", banque=" + banque + ", typeCompte="
+				+ typeCompte + ", descriptionCompte=" + descriptionCompte + "]";
+	}
+	
+    
+    
+}
+    
+   
+   
+   

@@ -1,0 +1,105 @@
+package com.mproduits.web.controller;
+
+import com.mproduits.dao.CompteDao;
+import com.mproduits.model.Compte;
+import com.mproduits.service.CompteService;
+import com.mproduits.service.CompteServiceImp;
+import com.mproduits.web.exceptions.CompteAlreadayExistException;
+import com.mproduits.web.exceptions.CompteNotFoundException;
+
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
+
+import java.net.URI;
+import java.util.List;
+import java.util.stream.Collectors;
+
+import javax.validation.Valid;
+
+@Api("API pour les opérations CRUD sur les produits.")
+@RestController
+public class CompteController {
+
+	@Autowired
+	CompteService compteService;
+	// Affiche la liste de tous les produits disponibles
+	@ApiOperation(value = "Récupère tous les compte en stock!")
+	@GetMapping(value = "/comptes")
+	public List<Compte> listeDesProduits() {
+
+		List<Compte> products = compteService.listeDesProduits();
+		if (products.isEmpty())
+			throw new CompteNotFoundException("Aucun compte n'est disponible à la vente");
+
+		return products;
+
+	}
+
+	// Récuperer un compte par son id
+	@ApiOperation(value = "Récupère un compte grâce à son ID à condition que celui-ci soit en stock!")
+	@GetMapping(value = "/comptes/{id}")
+	public Compte recupererUnProduit(@PathVariable int id) {
+
+		Compte compte = compteService.recupererUnCompte(id);
+
+		if (compte == null)
+			throw new CompteNotFoundException("Le compte correspondant à l'id " + id + " n'existe pas");
+
+		return compte;
+	}
+
+	// Ajouter un compte
+	@PostMapping(value = "/comptes/add")
+	public Compte ajouterUnCompte(@Valid @RequestBody Compte compte) {
+		// if(compte == null) throw new ProductAlreadayExistException("Le compte
+		// correspondant ne peut etre null ");
+		if (compte == null || compte.getCompte().isEmpty() || compte.getCompte() == null)
+			throw new CompteAlreadayExistException("Le compte correspondant ne peut etre null ");
+
+		return compteService.ajouterUnCompte(compte);
+	}
+
+	@ApiOperation(value = "Modifier  un compte grâce à son ID à condition que celui-ci soit en stock!")
+	@PutMapping(value = "/comptes")
+	public void updateProduit(@RequestBody Compte product) {
+
+		compteService.ajouterUnCompte(product);
+	}
+
+	@ApiOperation(value = "Supprimer un compte grâce à son ID à condition que celui-ci soit en stock!")
+	@DeleteMapping(value = "/comptes/{id}")
+	public void supprimerProduit(@PathVariable int id) {
+
+		compteService.supprimerCompte(id);
+	}
+
+	
+
+	// ajouter un compte
+	@ApiOperation(value = "ajouter un compte grâce à son ID à condition que celui-ci soit en stock!")
+	@PostMapping(value = "/comptes")
+	public ResponseEntity<Void> ajouterProduit(@RequestBody Compte compte) {
+
+		Compte compteAdded = compteService.ajouterCompte(compte);
+
+		if (compteAdded == null)
+			return ResponseEntity.noContent().build();
+
+		URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
+				.buildAndExpand(compteAdded.getId()).toUri();
+		return ResponseEntity.created(location).build();
+	}
+	
+	
+}
